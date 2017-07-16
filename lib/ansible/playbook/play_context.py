@@ -541,8 +541,11 @@ class PlayContext(Base):
 
             elif self.become_method == 'pbrun':
 
-                prompt = 'Password:'
-                becomecmd = '%s %s -u %s %s' % (exe, flags, self.become_user, success_cmd)
+                # prompt = 'Password:'
+                prompt = 'Enter PASSCODE:' # this needs to be modifyable
+                # becomecmd = '%s %s -u %s %s' % (exe, flags, self.become_user, success_cmd)
+                # this one also ... can not rely on success_cmd being runnable through the pbrun mechanism (need to send through stdin or whatever is post-connect ops)
+                becomecmd = '%s %s' % (exe, flags)
 
             elif self.become_method == 'ksu':
                 def detect_ksu_prompt(b_data):
